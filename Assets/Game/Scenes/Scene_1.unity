@@ -152,10 +152,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9a6feb6fa26c6d41a92f0ba4df75175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 5
-  height: 6
-  tilePrefab: {fileID: 6536044594705227257, guid: a95b1d7ecb4ce784198022b44419493b, type: 3}
-  arrayFish:
+  _width: 5
+  _height: 6
+  _tilePrefab: {fileID: 6536044594705227257, guid: a95b1d7ecb4ce784198022b44419493b, type: 3}
+  _arrayFish:
   - {fileID: -392814084037969474, guid: ad4a16ce42283b4478a23beb5feed9a8, type: 3}
   - {fileID: 6009479250568978515, guid: d284404f90a599046b3de73dcb60cee5, type: 3}
   - {fileID: -8213939024076000380, guid: 4fd9b979bafdfb94e80e738e7c09f882, type: 3}

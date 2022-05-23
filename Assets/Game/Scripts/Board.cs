@@ -4,58 +4,46 @@ using UnityEngine;
 
     public class Board : MonoBehaviour
 {
-    public int width;
-    public int height;
+    [SerializeField]
+    private int _width;
+    [SerializeField]
+    private int _height;
+    [SerializeField]
+    private GameObject _tilePrefab;
+    [SerializeField]
+    private Fish[] _arrayFish;
+    [SerializeField]
+    private Fish[,] _trackAllFish;
 
-    public GameObject tilePrefab;
-
-    public Fish[] arrayFish;
-    public Fish[,] allFish;
-
-    // Start is called before the first frame update
     [ContextMenu("Start")]
     void Start()
     {
-
-        allFish = new Fish[width,height];
-        SetupTiles();
-        SetupFishFirstRaw();
+        _trackAllFish = new Fish[_width,_height];
+        SetupBoard();
     }
 
-    private void SetupTiles()
+    private void SetupBoard()
     {
-        for (int x = 0; x < width; x++)
+        for (int x = 0; x < _width; x++)
         {
-            for (int y = 0; y < height; y++)
+            for (int y = 0; y < _height; y++)
             {
                 Vector2 pos = new(x, y);
-                GameObject tile = Instantiate(tilePrefab, pos, Quaternion.identity);
+                GameObject tile = Instantiate(_tilePrefab, pos, Quaternion.identity);
                 tile.transform.parent = transform;
                 tile.name = "Tile - " + x + ", " + y;
-            }
-        }
-    }
-
-    private void SetupFishFirstRaw()
-    {
-        for (int x = 0; x < width; x++)
-        {
-            for (int y = height - 1; y < height; y++)
-            {
-                int spawnRandomFish = Random.Range(0, arrayFish.Length);
-                SpawnFish(new Vector2Int(x, y), arrayFish[spawnRandomFish]);
+                int spawnRandomFish = Random.Range(0, _arrayFish.Length);
+                SpawnFish(new Vector2Int(x, y), _arrayFish[spawnRandomFish]);
             }
         }
     }
 
     private void SpawnFish(Vector2Int pos, Fish fishToSpawn)
     {
-        Fish fish = Instantiate(fishToSpawn, new Vector3(pos.x, pos.y, 0f), Quaternion.identity);
-        fish.transform.parent = this.transform;
-        fish.name = "Fish - " + pos.x + ", " + pos.y;
-
-        allFish[pos.x, pos.y] = fish;
-
-        fish.SetupFish(pos, this);
+        Fish _fish = Instantiate(fishToSpawn, new Vector3(pos.x, pos.y, 0f), Quaternion.identity);
+        _fish.transform.parent = transform;
+        _fish.name = "Fish - " + pos.x + ", " + pos.y;
+        _trackAllFish[pos.x, pos.y] = _fish;
+        _fish.TrackFish(pos, this);
     }
 }
