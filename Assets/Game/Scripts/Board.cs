@@ -15,7 +15,7 @@ using UnityEngine;
     private Fish[,] _trackAllFish;
 
     [ContextMenu("Start")]
-    void Start()
+    private void Start()
     {
         _trackAllFish = new Fish[_width,_height];
         SetupTiles();
@@ -40,19 +40,17 @@ using UnityEngine;
     {
         for (int x = 0; x < _width; x++)
         {
-            for (int y = _height -1; y < _height; y++)
-            {
-                int spawnRandomFish = Random.Range(0, _arrayFish.Length);
-                SpawnFish(new Vector2Int(x, y), _arrayFish[spawnRandomFish]);
-            }
+            int y = _height - 1;
+            int spawnRandomFish = Random.Range(0, _arrayFish.Length);
+            SpawnFish(new Vector2Int(x, y), _arrayFish[spawnRandomFish]);
         }
     }
 
     private void SpawnFish(Vector2Int pos, Fish fishToSpawn)
     {
-        Fish _fish = Instantiate(fishToSpawn, new Vector3(pos.x, pos.y, 0f), Quaternion.identity);
-        _fish.transform.parent = transform;
-        _fish.name = "Fish - " + pos.x + ", " + pos.y;
-        _trackAllFish[pos.x, pos.y] = _fish;
+        Fish fish = Instantiate(fishToSpawn, new Vector3(pos.x, pos.y, 0f), Quaternion.identity);
+        fish.transform.parent = transform;
+        fish.name = "Fish - " + pos.x + ", " + pos.y;
+        _trackAllFish[pos.x, pos.y] = fish;
     }
 }
